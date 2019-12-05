@@ -6,8 +6,8 @@ terraform {
 
 provider "aws" {
   version = "~> 2.40"
-  profile    = var.profile
-  region     = var.region
+  profile = var.profile
+  region  = var.region
 }
 
 provider "template" {
@@ -32,10 +32,10 @@ resource "aws_iam_user" "user" {
 resource "aws_iam_policy" "policy" {
   name        = "eksctl-policy"
   description = "Permissions for EKS cluster creation and management"
-  policy = templatefile("eksctl-policy.json.tpl", {account_id = data.aws_caller_identity.current.account_id})
+  policy      = templatefile("eksctl-policy.json.tpl", {account_id = data.aws_caller_identity.current.account_id})
 }
 
 resource "aws_iam_user_policy_attachment" "attach-eksctl-permissions" {
-  user       = aws_iam_user.user.name
-  policy_arn = aws_iam_policy.policy.arn
+  user        = aws_iam_user.user.name
+  policy_arn  = aws_iam_policy.policy.arn
 }

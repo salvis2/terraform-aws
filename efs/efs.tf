@@ -66,21 +66,21 @@ resource "aws_efs_file_system" "jhub_efs" {
 
 # One for each private subnet
 resource "aws_efs_mount_target" "jhub_efs_mount" {
-   count = length(data.aws_subnet.private)
-   file_system_id  = aws_efs_file_system.jhub_efs.id
-   subnet_id = data.aws_subnet.private[count.index].id
-   security_groups = [aws_security_group.jhub_efs_sg.id]
+   count            = length(data.aws_subnet.private)
+   file_system_id   = aws_efs_file_system.jhub_efs.id
+   subnet_id        = data.aws_subnet.private[count.index].id
+   security_groups  = [aws_security_group.jhub_efs_sg.id]
  }
 
 resource "aws_security_group" "jhub_efs_sg" {
-   name = "jhub-efs-sg"
+   name   = "jhub-efs-sg"
    vpc_id = data.aws_eks_cluster.jupyterhub.vpc_config.0.vpc_id 
 
    # NFS
    ingress {
-     security_groups = data.aws_security_groups.select.ids
-     from_port = 2049
-     to_port = 2049
-     protocol = "tcp"
+     security_groups  = data.aws_security_groups.select.ids
+     from_port        = 2049
+     to_port          = 2049
+     protocol         = "tcp"
    }
  }
