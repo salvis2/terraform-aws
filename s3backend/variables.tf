@@ -7,9 +7,9 @@ variable "region" {
 }
 
 variable "bucket_name" {
-  default = "terraform-pangeo-access-state"
+  default = "terraform-pangeo-access-state-alvis"
 }
 
 variable "dynamo_table_name" {
-  default = "terraform-pangeo-access-locks"
+  default = "terraform-pangeo-access-locks-alvis"
 }
