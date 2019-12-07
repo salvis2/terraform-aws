@@ -6,15 +6,18 @@ terraform {
 
 # After first terraform apply, store state in S3 by uncommenting, and re-running `terraform init` 
 # variables not allowed in backend config, so you must manually enter bucket, region, table
-terraform {
-  backend "s3" {
-    bucket         = "terraform-pangeo-access-state"
-    key            = "global/s3/terraform.tfstate"
-    region         = "us-west-2"
-    dynamodb_table = "terraform-pangeo-access-locks"
-    encrypt        = true
-  }
-}
+# DON'T  INCLUDE THIS PART IN THIS FOLDER
+# Put the following into the other folders where you want the state stored.
+# Can't store this state, unfortunately
+#terraform {
+#  backend "s3" {
+#    bucket         = "terraform-pangeo-access-state-alvis"
+#    key            = "global/s3/terraform.tfstate"
+#    region         = "us-west-2"
+#    dynamodb_table = "terraform-pangeo-access-locks-alvis"
+#    encrypt        = true
+#  }
+#}
 
 provider "aws" {
   version     = "~> 2.40"
@@ -35,7 +38,8 @@ output "dynamodb_table_name" {
 
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = var.bucket_name
+  bucket        = var.bucket_name
+  force_destroy = true
   versioning {
     enabled = true
   }
