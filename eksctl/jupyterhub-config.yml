@@ -1,3 +1,5 @@
+proxy:
+  secretToken: "77262b154c84d684f2cd423d8ff09720d5a06bec84cab4cd4aaff8ab34023d93"
 prePuller:
   continuous:
     enabled: false
