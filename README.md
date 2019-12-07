@@ -57,37 +57,37 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
 ### Terraform's S3 Backend Setup
 
 - Go to s3backend directory and make the bucket and table
- - `terraform init`
- - `terraform plan`
- - `terraform apply'`
+  - `terraform init`
+  - `terraform plan`
+  - `terraform apply'`
 - Go to eks directory
- - Add backend code to eks directory
- - Code should already be present, just needs to be uncommented
- - It is the `terraform { backend "s3" {...} }` block
+  - Add backend code to eks directory
+  - Code should already be present, just needs to be uncommented
+  - It is the `terraform { backend "s3" {...} }` block
 
 ### Basic Pangeo JupyterHub Install
 
 - Go to eks directory and make the IAM Role / permissions
- - `terraform init`
- - `terraform plan`
- - `terraform apply'`
+  - `terraform init`
+  - `terraform plan`
+  - `terraform apply'`
 - Make new aws keys and a new profile for them, configure in terminal
- - `aws configure --profile eksbot`
+  - `aws configure --profile eksbot`
 - Go to eksctl directory and make the cluster
- - `./create_cluster.sh`
+  - `./create_cluster.sh`
 - Install JupyterHub Helm chart onto cluster
- - [`kubectl create ns jhub`](https://github.com/helm/helm/issues/5753#issue-445472415)
-  - [Why](https://github.com/helm/helm/issues/5753#issuecomment-502163585)
- - Add repo, update, install chart as below
- - `helm upgrade --install $RELEASE jupyterhub/jupyterhub --namespace $NAMESPACE --version=0.8.2 --values jupyterhub-config.yml`
+  - [`kubectl create ns jhub`](https://github.com/helm/helm/issues/5753#issue-445472415)
+    - [Why](https://github.com/helm/helm/issues/5753#issuecomment-502163585)
+  - Add repo, update, install chart as below
+  - `helm upgrade --install $RELEASE jupyterhub/jupyterhub --namespace $NAMESPACE --version=0.8.2 --values jupyterhub-config.yml`
 
 ### Uninstall
 
 - `helm delete jhub --namespace jhub`
 - `kubectl delete namespace jhub`
 - In the eksctl folder
- - `eksctl delete cluster --profile eksbot --config-file=eksctl-config.yml --wait`
+  - `eksctl delete cluster --profile eksbot --config-file=eksctl-config.yml --wait`
 - In the eks folder
- - `terraform destroy`
+  - `terraform destroy`
 - If you created the S3 Backend, in the s3backend folder
- - `terraform destroy`
+  - `terraform destroy`
