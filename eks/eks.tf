@@ -4,15 +4,15 @@ terraform {
   required_version = ">= 0.12.0"
 }
 
-terraform {
-  backend "s3" {
-    bucket         = "terraform-pangeo-access-state-alvis"
-    key            = "eks-role/terraform-eks-role.tfstate"
-    region         = "us-west-2"
-    dynamodb_table = "terraform-pangeo-access-locks-alvis"
-    encrypt        = true
-  }
-}
+#terraform {
+#  backend "s3" {
+#    bucket         = "terraform-pangeo-access-state-alvis"
+#    key            = "eks-role/terraform-eks-role.tfstate"
+#    region         = "us-west-2"
+#    dynamodb_table = "terraform-pangeo-access-locks-alvis"
+#    encrypt        = true
+#  }
+#}
 
 provider "aws" {
   version = "~> 2.40"
