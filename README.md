@@ -59,7 +59,7 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
 - Go to s3backend directory and make the bucket and table
   - `terraform init`
   - `terraform plan`
-  - `terraform apply'`
+  - `terraform apply`
 - Go to eks directory
   - Add backend code to eks directory
   - Code should already be present, just needs to be uncommented
@@ -70,7 +70,7 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
 - Go to eks directory and make the IAM Role / permissions
   - `terraform init`
   - `terraform plan`
-  - `terraform apply'`
+  - `terraform apply`
 - Make new aws keys and a new profile for them, configure in terminal
   - `aws configure --profile eksbot`
 - Go to eksctl directory and make the cluster
