@@ -12,15 +12,15 @@ provider "aws" {
 }
 
 # Backend
-#terraform {
-#  backend "s3" {
-#    bucket         = "terraform-pangeo-access-state-alvis"
-#    key            = "eks-role/terraform-eks-role.tfstate"
-#    region         = "us-west-2"
-#    dynamodb_table = "terraform-pangeo-access-locks-alvis"
-#    encrypt        = true
-#  }
-#}
+terraform {
+  backend "s3" {
+    bucket         = "terraform-pangeo-access-state-alvis"
+    key            = "efs/terraform-jupyter-efs.tfstate"
+    region         = "us-west-2"
+    dynamodb_table = "terraform-pangeo-access-locks-alvis"
+    encrypt        = true
+  }
+}
 
 # DATA
 # --------
