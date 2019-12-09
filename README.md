@@ -80,11 +80,17 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
     - [Why](https://github.com/helm/helm/issues/5753#issuecomment-502163585)
   - Add repo, update, install chart as below
   - `helm upgrade --install $RELEASE jupyterhub/jupyterhub --namespace $NAMESPACE --version=0.8.2 --values jupyterhub-config.yml`
+- Go to efs directory and create the EFS for JupyterHub users' files
+  - `terraform init`
+  - `terraform plan`
+  - `terraform apply`
 
 ### Uninstall
 
 - `helm delete jhub --namespace jhub`
 - `kubectl delete namespace jhub`
+- In the efs folder
+  - `terraform destroy`
 - In the eksctl folder
   - `eksctl delete cluster --profile eksbot --config-file=eksctl-config.yml --wait`
 - In the eks folder
