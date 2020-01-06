@@ -60,10 +60,8 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
   - `terraform init`
   - `terraform plan`
   - `terraform apply`
-- Go to eks directory
-  - Add backend code to eks directory
-  - Code should already be present, just needs to be uncommented
-  - It is the `terraform { backend "s3" {...} }` block
+- Every folder whose state file you want stored on S3 needs a block in a .tf file
+  - Example: the `terraform { backend "s3" {...} }` block in eks.tf tells Terraform where to store and retrieve the state file
 
 ### Basic Pangeo JupyterHub Install
 
