@@ -6,7 +6,7 @@ terraform {
 
 # After first terraform apply, store state in S3 by uncommenting, and re-running `terraform init` 
 # variables not allowed in backend config, so you must manually enter bucket, region, table
-# DON'T  INCLUDE THIS PART IN THIS FOLDER
+# DON'T INCLUDE THIS PART IN THIS FOLDER
 # Put the following into the other folders where you want the state stored.
 # Can't store this state, unfortunately
 #terraform {
@@ -25,6 +25,7 @@ provider "aws" {
   region      = var.region
 }
 
+data "aws_caller_identity" "current" {}
 
 output "s3_bucket_arn" {
   value       = aws_s3_bucket.terraform_state.arn
@@ -50,6 +51,10 @@ resource "aws_s3_bucket" "terraform_state" {
       }
     }
   }
+  tags = {
+    Owner = split("/", data.aws_caller_identity.current.arn)[1]
+    PrincipalId = data.aws_caller_identity.current.user_id
+  }
 }
 
 resource "aws_dynamodb_table" "terraform_locks" {
@@ -59,5 +64,9 @@ resource "aws_dynamodb_table" "terraform_locks" {
   attribute {
     name = "LockID"
     type = "S"
+  }
+  tags = {
+    Owner = split("/", data.aws_caller_identity.current.arn)[1]
+    PrincipalId = data.aws_caller_identity.current.user_id
   }
 }
