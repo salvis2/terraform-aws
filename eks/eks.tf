@@ -40,13 +40,15 @@ resource "aws_iam_user" "user" {
   name = var.iam_user
 }
 
-resource "aws_iam_policy" "policy" {
-  name        = "eksctl-policy"
-  description = "Permissions for EKS cluster creation and management"
-  policy      = templatefile("eksctl-policy.json.tpl", {account_id = data.aws_caller_identity.current.account_id})
-}
+# Have turned this block into a data source
+# That is the recommended method
+#resource "aws_iam_policy" "policy" {
+#  name        = "eksctl-policy"
+#  description = "Permissions for EKS cluster creation and management"
+#  policy      = templatefile("eksctl-policy.json.tpl", {account_id = data.aws_caller_identity.current.account_id})
+#}
 
 resource "aws_iam_user_policy_attachment" "attach-eksctl-permissions" {
   user        = aws_iam_user.user.name
-  policy_arn  = aws_iam_policy.policy.arn
+  policy_arn  = aws_iam_policy.eksctl_policy.arn
 }
