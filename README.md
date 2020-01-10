@@ -70,7 +70,7 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
   - `terraform plan`
   - `terraform apply`
 - Make new aws keys and a new profile for them, configure in terminal
-  - `aws configure --profile eksbot`
+  - `aws configure --profile eksctlbot`
 - Go to eksctl directory and make the cluster
   - `./create_cluster.sh`
 - Install JupyterHub Helm chart onto cluster
@@ -90,7 +90,7 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
 - In the efs folder
   - `terraform destroy`
 - In the eksctl folder
-  - `eksctl delete cluster --profile eksbot --config-file=eksctl-config.yml --wait`
+  - `eksctl delete cluster --profile eksctlbot --config-file=eksctl-config.yml --wait`
 - In the eks folder
   - `terraform destroy`
 - If you created the S3 Backend, in the s3backend folder
