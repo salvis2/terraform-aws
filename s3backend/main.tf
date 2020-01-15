@@ -52,8 +52,8 @@ resource "aws_s3_bucket" "terraform_state" {
     }
   }
   tags = {
-    Owner = split("/", data.aws_caller_identity.current.arn)[1]
-    PrincipalId = data.aws_caller_identity.current.user_id
+    AutoTag_UserName = split("/", data.aws_caller_identity.current.arn)[1]
+    AutoTag_Creator = data.aws_caller_identity.current.arn
   }
 }
 
@@ -66,7 +66,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
     type = "S"
   }
   tags = {
-    Owner = split("/", data.aws_caller_identity.current.arn)[1]
-    PrincipalId = data.aws_caller_identity.current.user_id
+    AutoTag_UserName = split("/", data.aws_caller_identity.current.arn)[1]
+    AutoTag_Creator = data.aws_caller_identity.current.arn
   }
 }
