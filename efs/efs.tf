@@ -25,7 +25,7 @@ terraform {
 # DATA
 # --------
 data "aws_eks_cluster" "jupyterhub" {
-  name = "jupyterhub"
+  name = "jupyterhub-salvis"
 }
 
 data "aws_subnet_ids" "select" {
