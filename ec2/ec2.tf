@@ -5,11 +5,11 @@ provider "aws" {
 }
 
 # Create a new AWS Instance (default VPC)
-resource "aws_instance" "scotts-machine" {
+resource "aws_instance" "salvis-machine" {
   ami           = var.amis[var.region]
   instance_type = var.instance
   tags = {
-    Name = "scott test machine"
+    Name = "sebastian test machine"
   }
 }
 
