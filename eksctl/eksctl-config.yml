@@ -6,7 +6,7 @@ kind: ClusterConfig
 
 # CHANGE these if you want:
 metadata:
-  name: jupyterhub
+  name: jupyterhub-salvis
   region: us-west-2
 
 iam:
