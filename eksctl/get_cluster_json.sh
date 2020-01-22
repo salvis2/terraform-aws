@@ -4,4 +4,4 @@
 set -e
 
 # Return valid JSON string
-eksctl get cluster --name jupyterhub -o json --profile eksbot | jq -r ".[] | {Arn:.Arn}"
+eksctl get cluster --profile eksctlbot --name jupyterhub-salvis -o json | jq -r ".[] | {Arn:.Arn}"
