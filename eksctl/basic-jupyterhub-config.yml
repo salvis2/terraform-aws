@@ -1,0 +1,91 @@
+proxy:
+  secretToken: "7a3e75f6aa8a9ea20dd5ad8aa0e1e943c76af3927594cd90426df53c32a9a7b5"
+  https:
+    enabled: false
+    #hosts:
+    #  - hackweek.io
+    #letsencrypt:
+    #  contactEmail: scottyh@uw.edu
+  #service:
+  #  loadBalancerIP: "REPLACE"
+prePuller:
+  continuous:
+    enabled: false
+  hook:
+    enabled: false
+scheduling:
+  userScheduler:
+    enabled: false
+  userPods:
+    nodeAffinity:
+      matchNodePurpose: require
+singleuser:
+  cloudMetadata: # taken care of by eksctl node configuration
+    enabled: true
+  defaultUrl: "/lab"
+  #serviceAccountName: jovyan
+  storage:
+    capacity: 100Gi
+  startTimeout: 600
+  cpu:
+    limit: 4
+    guarantee: 3
+  memory:
+    limit: 16G
+    guarantee: 14G
+  #image: jupyter/minimal-notebook:latest
+  profileList:
+    - display_name: "Base-notebook (m5.2xlarge | 4 cores, 16Gb)"
+      description: "latest base-notebook from pangeo-stacks"
+      kubespawner_override:
+        image: pangeo/base-notebook:latest
+    - display_name: "Pangeo-notebook (m5.2xlarge | 4 cores, 16Gb)"
+      description: "latest pangeo-notebook from pangeo-stacks"
+      default: true
+      kubespawner_override:
+        image: pangeo/pangeo-notebook:latest
+
+  #profileList:
+  #  - display_name: "Minimal environment"
+  #    description: "To avoid too much bells and whistles: Python."
+  #    kubespawner_override:
+  #      image: jupyter/minimal-notebook:2343e33dec46
+  #  - display_name: "Datascience environment"
+  #    description: "If you want the additional bells and whistles: Python, R, and Julia."
+  #    default: true
+  #    kubespawner_override:
+  #      image: jupyter/datascience-notebook:2343e33dec46
+  #  - display_name: "Spark environment"
+  #    description: "The Jupyter Stacks spark image!"
+  #    kubespawner_override:
+  #      image: jupyter/all-spark-notebook:2343e33dec46
+auth:
+  type: github
+  github:
+    clientId: "ef5bb238687693faaee2"
+    clientSecret: "001f47c5e509760cfe42fcf7441e369dfda51ffa"
+    callbackUrl: "http://hackweek.io/hub/oauth_callback"
+  scopes:
+    - "read:user"
+    - "user:email"
+    - "read:org"
+  admin:
+    access: true
+    users:
+      - salvis2
+hub:
+  resources: # should fill up single node to near capacity
+    requests:
+      cpu: 1
+      memory: 2G
+    limits:
+      cpu: 2
+      memory: 4G
+#  #db: # https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/1244
+#  #  upgrade: true
+  extraConfig:
+    jupyterlab: |
+      c.Spawner.cmd = ['jupyter-labhub']
+  #services:
+  #  dask-gateway:
+  #    apiToken: "156051a6c48dfb9a892d494e77c6bc7dc480436de5cafeb37be7a4d2a2b0397c"
