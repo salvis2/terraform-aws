@@ -73,6 +73,8 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
   - `aws configure --profile eksctlbot`
 - Go to eksctl directory and make the cluster
   - `./create_cluster.sh`
+- Install the autoscaler
+  - `kubectl apply -f k8s-autoscaler.yml`
 - Install JupyterHub Helm chart onto cluster
   - [`kubectl create ns jhub`](https://github.com/helm/helm/issues/5753#issue-445472415)
     - [Why](https://github.com/helm/helm/issues/5753#issuecomment-502163585)
