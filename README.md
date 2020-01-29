@@ -102,10 +102,12 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
 
 - `helm delete jhub --namespace jhub`
 - `kubectl delete namespace jhub`
+- `kubectl delete -f k8s-autoscaler.yml`
 - In the efs folder
   - `terraform destroy`
 - In the eksctl folder
   - `eksctl delete cluster --profile eksctlbot --config-file=eksctl-config.yml --wait`
+    - If the command errors out talking about a security group dependency, just wait 5 min and try again. You can also go look up the security group it references and see it get deleted.
 - In the eks folder
   - `terraform destroy`
 - If you created the S3 Backend, in the s3backend folder
