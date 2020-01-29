@@ -89,7 +89,7 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
   - Enabling HTTPS
     -`basic-jupyterhub-config.yml` should have an https block that is disabled. Run `kubectl get svc -n jhub` and go to the external IP for the proxy-public service in your web browser.
     - Go to your hosted domain and create an A record pointing to the external IP above.
-    - Wait until you can type in your hosted domain and get a Timeout error.
+    - Wait until you can type in your hosted domain and get a "site cannot be reached" / "took too long to respond" error. This error currently indicates the correct behavior that the IP address is linked to the domain, but the connection isn't established on JupyterHub's end and thus times out (I think).
     - Go back into `basic-jupyterhub-config.yml` and comment out the `enabled: false` line.
     - Uncomment the four lines below (hosts, your hosted domain, letsencrypt, and contactEmail)
     - Re run the `helm upgrade` command as above.
