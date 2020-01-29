@@ -18,6 +18,10 @@ Currently, the setup for a JupyterHub has a lot of variablity. This is unideal f
 
 This repository will help us enforce a documentation onto the Pangeo JupyterHub deployment. The added benefit of using Terraform is that a lot of the AWS infrastructure can now be written as code. This aids in readability, reproducability, and flexibility. Terraform is a provider-agnostic Infrastructure-as-Code (IAC) tool, free to use, and has a decently large user group.
 
+Note: It may feel like there are a lot of different moving parts to this setup. This is true. Currently, Terraform and eksctl are both used to create infrastructure on AWS. eksctl requires much less configuration than Terraform, but has a much more limited set of use cases and can only affect one cloud provider. In the future, we hope to have everything spun up on Terraform. 
+
+Once the cluster is set up, we need to install software on the it. We do this with `kubectl apply` and `helm upgrade`, which are two different softwares. Kubectl is the kubernetes command line tool, which we use to install software that are completely defined in local files (k8s-autoscaler.yml). Helm is the kubernetes package manager, which can find and deploy software that is publicly available online. We pass configuration files with Helm to override default settings.
+
 ## Repo Contents
 
 The ec2 folder has Terraform files to setup an AWS EC2 instance.
