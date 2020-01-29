@@ -77,7 +77,16 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
   - [`kubectl create ns jhub`](https://github.com/helm/helm/issues/5753#issue-445472415)
     - [Why](https://github.com/helm/helm/issues/5753#issuecomment-502163585)
   - Add repo, update, install chart as below
-  - `helm upgrade --install $RELEASE jupyterhub/jupyterhub --namespace $NAMESPACE --version=0.8.2 --values jupyterhub-config.yml`
+    - `helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/`
+    - `helm repo upgrade`
+    - `helm upgrade --install jhub jupyterhub/jupyterhub -n jhub --version=0.9.0-beta.3 --values basic-jupyterhub-config.yml`
+  - Enabling HTTPS
+    -`basic-jupyterhub-config.yml` should have an https block that is disabled. Run `kubectl get svc -n jhub` and go to the external IP for the proxy-public service in your web browser.
+    - Go to your hosted domain and create an A record pointing to the external IP above.
+    - Wait until you can type in your hosted domain and get a Timeout error.
+    - Go back into `basic-jupyterhub-config.yml` and comment out the `enabled: false` line.
+    - Uncomment the four lines below (hosts, your hosted domain, letsencrypt, and contactEmail)
+    - Re run the `helm upgrade` command as above.
 - Go to efs directory and create the EFS for JupyterHub users' files
   - `terraform init`
   - `terraform plan`
