@@ -30,7 +30,7 @@ iam:
         Resource: '*'
 
 nodeGroups:
-  - name: core
+  - name: core-v2
     instanceType: m5.large
     minSize: 1
     maxSize: 1
@@ -38,12 +38,15 @@ nodeGroups:
     privateNetworking: true
     volumeSize: 100
     volumeType: gp2
+    iam:
+      withAddonPolicies:
+        autoScaler: true
     labels:
       node-role.kubernetes.io/core: core
       hub.jupyter.org/node-purpose: core
     ami: auto
     amiFamily: Ubuntu1804
-  - name: user-spot
+  - name: user-spot-v2
     minSize: 0
     maxSize: 100
     desiredCapacity: 0
@@ -58,12 +61,16 @@ nodeGroups:
       onDemandPercentageAboveBaseCapacity: 0 # all spot
     volumeSize: 100
     volumeType: gp2
+    #iam:
+    #  withAddonPolicies:
+    #    autoScaler: true
     labels:
       node-role.kubernetes.io/user: user
       hub.jupyter.org/node-purpose: user
     taints:
       hub.jupyter.org/dedicated: 'user:NoSchedule'
     tags:
+        k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/user: user
         k8s.io/cluster-autoscaler/node-template/label/hub.jupyter.org/node-purpose: user
         k8s.io/cluster-autoscaler/node-template/taint/hub.jupyter.org/dedicated: 'user:NoSchedule'
     ami: auto
@@ -73,7 +80,7 @@ nodeGroups:
       - iptables --insert FORWARD 1 --in-interface eni+ --destination 169.254.169.254/32 --jump DROP
       - iptables-save | tee /etc/sysconfig/iptables
       - systemctl enable --now iptables
-  - name: worker-spot
+  - name: worker-spot-v2
     minSize: 0
     maxSize: 100
     desiredCapacity: 0
@@ -87,14 +94,18 @@ nodeGroups:
       onDemandPercentageAboveBaseCapacity: 0
     volumeSize: 100
     volumeType: gp2
+    #iam:
+    #  withAddonPolicies:
+    #    autoScaler: true
     labels:
       node-role.kubernetes.io/worker: worker
       k8s.dask.org/node-purpose: worker
     taints:
       k8s.dask.org/dedicated: 'worker:NoSchedule'
     tags:
+        k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/worker: worker
         k8s.io/cluster-autoscaler/node-template/label/k8s.dask.org/node-purpose: worker
-        k8s.io/cluster-autoscaler/node-template/taint/k8s.dask.org/dedicated: "worker:NoSchedule"
+        k8s.io/cluster-autoscaler/node-template/taint/k8s.dask.org/dedicated: 'worker:NoSchedule'
     ami: auto
     amiFamily: Ubuntu1804
     preBootstrapCommands: # see https://github.com/weaveworks/eksctl/issues/1310
