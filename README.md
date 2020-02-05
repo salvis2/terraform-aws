@@ -84,7 +84,7 @@ Currently, JupyterHub creation can be done with the eks and eksctl folders, and 
     - [Why](https://github.com/helm/helm/issues/5753#issuecomment-502163585)
   - Add repo, update, install chart as below
     - `helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/`
-    - `helm repo upgrade`
+    - `helm repo update`
     - `helm upgrade --install jhub jupyterhub/jupyterhub -n jhub --version=0.9.0-beta.3 -f basic-jupyterhub-config.yml -f secret-jupyterhub-token.yml`
   - Enabling HTTPS (optional)
     -`basic-jupyterhub-config.yml` should have an https block that is disabled. Run `kubectl get svc -n jhub` and go to the external IP for the proxy-public service in your web browser. Make sure you can get to the landing page.
