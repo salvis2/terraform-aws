@@ -70,7 +70,7 @@ nodeGroups:
     taints:
       hub.jupyter.org/dedicated: 'user:NoSchedule'
     tags:
-        k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/user: user
+        #k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/user: user
         k8s.io/cluster-autoscaler/node-template/label/hub.jupyter.org/node-purpose: user
         k8s.io/cluster-autoscaler/node-template/taint/hub.jupyter.org/dedicated: 'user:NoSchedule'
     ami: auto
@@ -103,7 +103,7 @@ nodeGroups:
     taints:
       k8s.dask.org/dedicated: 'worker:NoSchedule'
     tags:
-        k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/worker: worker
+        #k8s.io/cluster-autoscaler/node-template/label/node-role.kubernetes.io/worker: worker
         k8s.io/cluster-autoscaler/node-template/label/k8s.dask.org/node-purpose: worker
         k8s.io/cluster-autoscaler/node-template/taint/k8s.dask.org/dedicated: 'worker:NoSchedule'
     ami: auto
