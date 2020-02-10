@@ -1,5 +1,5 @@
 proxy:
-  secretToken: "7a3e75f6aa8a9ea20dd5ad8aa0e1e943c76af3927594cd90426df53c32a9a7b5"
+  #secretToken: "in-another-file-that-is-encrypted"
   https:
     enabled: false
     #hosts:
@@ -38,12 +38,12 @@ singleuser:
     - display_name: "Base-notebook (m5.2xlarge | 4 cores, 16Gb)"
       description: "latest base-notebook from pangeo-stacks"
       kubespawner_override:
-        image: pangeo/base-notebook:latest
+        image: pangeo/base-notebook:2019.12.07
     - display_name: "Pangeo-notebook (m5.2xlarge | 4 cores, 16Gb)"
       description: "latest pangeo-notebook from pangeo-stacks"
       default: true
       kubespawner_override:
-        image: pangeo/pangeo-notebook:latest
+        image: pangeo/pangeo-notebook:2019.12.07
 
   #profileList:
   #  - display_name: "Minimal environment"
@@ -61,10 +61,6 @@ singleuser:
   #      image: jupyter/all-spark-notebook:2343e33dec46
 auth:
   type: github
-  github:
-    clientId: "ef5bb238687693faaee2"
-    clientSecret: "001f47c5e509760cfe42fcf7441e369dfda51ffa"
-    callbackUrl: "http://hackweek.io/hub/oauth_callback"
   scopes:
     - "read:user"
     - "user:email"
@@ -86,6 +82,6 @@ hub:
   extraConfig:
     jupyterlab: |
       c.Spawner.cmd = ['jupyter-labhub']
-  #services:
-  #  dask-gateway:
-  #    apiToken: "156051a6c48dfb9a892d494e77c6bc7dc480436de5cafeb37be7a4d2a2b0397c"
+  services:
+    dask-gateway:
+      apiToken: "156051a6c48dfb9a892d494e77c6bc7dc480436de5cafeb37be7a4d2a2b0397c"
