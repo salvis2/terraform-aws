@@ -1,5 +1,5 @@
 proxy:
-  secretToken: "77262b154c84d684f2cd423d8ff09720d5a06bec84cab4cd4aaff8ab34023d93"
+  secretToken: "784fc6f24ee130b59edae9b16991d9df68f471251d72a8cbe4ffe519e2a9780e"
 prePuller:
   continuous:
     enabled: false
